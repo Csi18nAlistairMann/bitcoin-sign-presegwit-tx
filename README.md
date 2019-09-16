@@ -6,6 +6,10 @@ This project was to learn more about how raw transactions can be signed, and
 develops runeks' answer at https://bitcoin.stackexchange.com/a/5241/89798.
 Please note ONLY presegwit transactions (version 01000000) are supported.
 
+I expand on the original snippet to include generating the transactions used
+by the code snippet, and follow by checking the answer by single-stepping
+through the resulting signed transaction.
+
 Linux, bash and python2 are assumed.
 
 # Usage
@@ -15,15 +19,16 @@ To run with just the example regtest data:
 
 To generate fresh data:
 1. Install bitcoin-0.13.2
-2. Add the provided config/regtest.conf file to your .bitcoin directory
+2. Add the provided `config/regtest.conf` file to your .bitcoin directory
 3. Install bitcoin-tool (by Mat Anger)
-4. run `scripts/generate-new-tx.sh`
-5. Edit the four displayed variables by 4 into `scripts/bsec-3374.py`
-6. run `python2 scripts/bsec-3374.py`
+4. Run `scripts/generate-new-tx.sh`
+5. Edit the four displayed variables into `scripts/bsec-3374.py`
+6. Run `python2 scripts/bsec-3374.py`
 
 Optionally, to see your transaction single-stepped:
 7. Install btcdeb
 8. take the output from `bsec-3374.py` above and run as a command.
+
 See `btcdeb/README.md` for more details.
 
 # Repository contents
