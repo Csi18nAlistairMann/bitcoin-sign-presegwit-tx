@@ -7,10 +7,16 @@ develops runeks' answer at https://bitcoin.stackexchange.com/a/5241/89798.
 Please note ONLY presegwit transactions (version 01000000) are supported.
 
 I expand on the original snippet to include generating the transactions used
-by the code snippet, and follow by checking the answer by single-stepping
-through the resulting signed transaction.
+and change the output to assist single-stepping through the resulting signed
+transaction.
 
 Linux, bash and python2 are assumed.
+
+Note: This project was developed on a 2016-era Linux Mint 17.3 system
+downloaded from https://linuxmint.com/edition.php?id=204. I'm aware that the
+file brutus/ecdsa_ssl.py contains the line
+`priv_key = ssl.BN_bin2bn(secret, 32, ssl.BN_new())` which segfaults on
+Debian 9 (2017) and Kubuntu 18.04 (2018).
 
 # Usage
 
@@ -26,9 +32,8 @@ To generate fresh data:
 6. Run `python2 scripts/bsec-3374.py`
 
 Optionally, to see your transaction single-stepped:
-7. Install btcdeb
-8. take the output from `bsec-3374.py` above and run as a command.
-
+1. Install btcdeb
+2. take the output from `bsec-3374.py` above and run as a command.
 See `btcdeb/README.md` for more details.
 
 # Repository contents
@@ -54,11 +59,11 @@ regtest network. This is the config file used.
 https://github.com/runeksvendsen/bitcointools as at 26 Sep 2012.
 Runes K. Svendsen's tools, used for for serializing and deserializing
 transactions, and base58 encoding/decoding. This is the nearest
-equivalent I can find to Gavin Andresen's now defunt repository which
+equivalent I can find to Gavin Andresen's now defunct repository which
 was used in the original answer.
 
 ## brutus/
-https://github.com/runeksvendsen/brutus/ as at 30 Oct 2012
+https://github.com/runeksvendsen/brutus/ as at 30 Oct 2012.
 Runes K. Svendsen's fork of ecdsa_ssl.py from Joric's Brutus
 repository. Used for constructing public/private EC key pairs and ECDSA
 signing.
@@ -86,6 +91,10 @@ the original raw, signed transaction.
 
 Call it with:
 `python2 bsec-3374.py`
+
+If the response is `Segmentation fault (core dumped)` you may be using
+a system that's too new as per note at the top of this file. Sorry!
+I don't have an answer as to what would correct it yet.
 
 ## btcdeb/
 Not present in this repository but can be found at
